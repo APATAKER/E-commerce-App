@@ -33,6 +33,7 @@ pipeline {
             //}
             steps {
                 script {
+                    sh "chmod +x -R $WORKSPACE"
                     sh "./destroy.sh"
                     sh 'docker-compose up -d'
                 }

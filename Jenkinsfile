@@ -34,6 +34,7 @@ pipeline {
             //}
             agent {
                 docker {
+                    label 'dockerjen'
                     image 'dhilipraja/prod:latest'
                 }
             }

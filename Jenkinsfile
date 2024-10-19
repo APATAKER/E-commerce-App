@@ -33,13 +33,13 @@ pipeline {
             //    branch 'main'
             //}
             steps {
-                script { 
-                    docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCred'){
+                script {
+                    agent {dockerjen}
+                    {
                         sh 'chmod +x -R $WORKSPACE'
                         sh './destroy.sh'
                         sh './deploy.sh' 
-
-                    }
+                    } 
                 }
             }
         }

@@ -32,14 +32,16 @@ pipeline {
             //when {
             //    branch 'main'
             //}
+            agent {
+                docker {
+                    image 'dhilipraja/prod:latest'
+                }
+            }
             steps {
                 script {
-                    agent {dockerjen}
-                    {
-                        sh 'chmod +x -R $WORKSPACE'
-                        sh './destroy.sh'
-                        sh './deploy.sh' 
-                    } 
+                    sh 'chmod +x -R $WORKSPACE'
+                    sh './destroy.sh'
+                    sh './deploy.sh'
                 }
             }
         }

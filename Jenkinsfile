@@ -33,7 +33,7 @@ pipeline {
             //}
             steps {
                 script {
-                    sh 'docker-compose down'
+                    sh "./destroy.sh"
                     sh 'docker-compose up -d'
                 }
             }

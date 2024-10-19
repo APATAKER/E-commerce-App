@@ -40,7 +40,8 @@ pipeline {
             steps {
                 script {
                     sh 'chmod +x -R $WORKSPACE'
-                    sh './destroy.sh'
+                    sh 'ls -l'
+                    //sh './destroy.sh'
                     sh './deploy.sh'
                 }
             }

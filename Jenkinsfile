@@ -28,18 +28,21 @@ pipeline {
                 }
             }
         }
-        /*stage('Deploy') {
+        stage('Deploy') {
             //when {
             //    branch 'main'
             //}
             steps {
                 script { 
-                    sh 'chmod +x -R $WORKSPACE'
-                    sh './destroy.sh'
-                    sh './deploy.sh' 
+                    docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCred'){
+                        sh 'chmod +x -R $WORKSPACE'
+                        sh './destroy.sh'
+                        sh './deploy.sh' 
+
+                    }
                 }
             }
-        }*/
+        }
     }
     
 

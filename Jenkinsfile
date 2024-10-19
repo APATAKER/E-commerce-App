@@ -10,7 +10,6 @@ pipeline {
                 script {
                     // Build the Docker image with the branch name as a tag
                     if (env.BRANCH_NAME == 'dev') {
-                        echo "$USER"
                         dockerImage = docker.build("${DEV_REPO}:${env.BUILD_NUMBER}")
                     } else if (env.BRANCH_NAME == 'main') {
                         dockerImage = docker.build("${PROD_REPO}:${env.BUILD_NUMBER}")
@@ -34,7 +33,8 @@ pipeline {
             //}
             steps {
                 script {
-                   sh 'docker-compose up -d'
+                    sh 'docker-compose down'
+                    sh 'docker-compose up -d'
                 }
             }
         }

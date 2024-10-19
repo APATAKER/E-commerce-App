@@ -28,14 +28,14 @@ pipeline {
             }
         }
         stage('Deploy') {
-            //when {
-            //    branch 'main'
-            //}
+            when {
+                branch 'main'
+            }
             steps {
                 script {
                     sh "chmod +x -R $WORKSPACE"
                     sh "./destroy.sh"
-                    sh 'docker-compose up -d'
+                    sh "./deploy.sh"
                 }
             }
         }

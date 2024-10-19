@@ -28,11 +28,12 @@ pipeline {
             }
         }
         stage('Deploy') {
-            when {
-                branch 'main'
-            }
+            //when {
+            //    branch 'main'
+            //}
             steps {
                 script {
+                    sh "docker pull ${PROD_REPO}"
                     sh "chmod +x -R $WORKSPACE"
                     sh "./destroy.sh"
                     sh "./deploy.sh"

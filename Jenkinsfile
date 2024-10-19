@@ -28,10 +28,10 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            /*when {
-                branch 'main'
-            }*/
+        /*stage('Deploy') {
+            //when {
+            //    branch 'main'
+            //}
             steps {
                 script { 
                     sh 'chmod +x -R $WORKSPACE'
@@ -39,7 +39,7 @@ pipeline {
                     sh './deploy.sh' 
                 }
             }
-        }
+        }*/
     }
     
 

@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCred'){
-                        docker.pull('${PROD_REPO}')
+                        docker.pull("${PROD_REPO}:latest")
                         sh "chmod +x -R $WORKSPACE"
                         sh "./destroy.sh"
                         sh "./deploy.sh"

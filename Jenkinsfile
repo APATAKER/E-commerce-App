@@ -33,10 +33,12 @@ pipeline {
             //}
             steps {
                 script {
-                    sh "docker pull ${PROD_REPO}"
-                    sh "chmod +x -R $WORKSPACE"
-                    sh "./destroy.sh"
-                    sh "./deploy.sh"
+                    docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCred'){
+                        sh "docker pull ${PROD_REPO}"
+                        sh "chmod +x -R $WORKSPACE"
+                        sh "./destroy.sh"
+                        sh "./deploy.sh"
+                    }
                 }
             }
         }

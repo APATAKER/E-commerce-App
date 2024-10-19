@@ -1,3 +1,3 @@
 #!/bin/sh
 echo "$USER"
-sudo docker-compose up -d
+docker-compose up -d

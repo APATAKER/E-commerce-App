@@ -36,10 +36,10 @@ pipeline {
                     docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCred'){
                         image = docker.image('dhilipraja/prod:latest')
                         image.pull()
+                        sh "chmod +x -R $WORKSPACE"
+                        sh "./destroy.sh"
+                        sh "./deploy.sh"
                     }
-                    sh "chmod +x -R $WORKSPACE"
-                    sh "./destroy.sh"
-                    sh "./deploy.sh"
                 }
             }
         }

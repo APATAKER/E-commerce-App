@@ -32,17 +32,9 @@ pipeline {
             //when {
             //    branch 'main'
             //}
-            agent {
-                docker {
-                    image 'dhilipraja/prod:latest'
-                }
-            }
             steps {
                 script {
-                    sh 'chmod +x -R $WORKSPACE'
-                    sh 'ls -l'
-                    //sh './destroy.sh'
-                    sh './deploy.sh'
+                   sh 'docker-compose up -d'
                 }
             }
         }

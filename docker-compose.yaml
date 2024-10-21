@@ -1,8 +1,57 @@
-version: "3"
+version: '3.8'
+
 services:
-  web:
-    #build: .
-    image: registry.hub.docker.com/dhilipraja/prod:latest
+  react-app:
+    build: registry.hub.docker.com/dhilipraja/prod:latest
     ports:
       - "80:80"
-    restart: always
+    networks:
+      - monitoring
+
+  nginx-exporter:
+    image: nginx/nginx-prometheus-exporter:0.11.0
+    ports:
+      - "9113:9113"
+    command:
+      - -nginx.scrape-uri=http://react-app:80/nginx_status
+    networks:
+      - monitoring
+    depends_on:
+      - react-app
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yaml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=admin
+    networks:
+      - monitoring
+    depends_on:
+      - prometheus
+
+networks:
+  monitoring:
+
+
+volumes:
+  prometheus_data:
+  grafana_data:

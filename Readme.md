@@ -83,7 +83,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 ### Adding Permission to access docker by different USER
 ```
 sudo usermod -a -G docker ec2-user
-sudo usermod -a -G docker Jenkins
+sudo usermod -a -G docker jenkins
 newgrp docker
 ```
 ### Installing Grafana

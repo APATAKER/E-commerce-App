@@ -45,6 +45,7 @@ sudo visudo -f /etc/sudoers
 Defaults:jenkins !authenticate
 jenkins ALL=(ALL) ALL
 ```
+* Make sure to restart Jenkins for the permission to go through
 ### WebHook
 http://<EC2_IP>:8080/multibranch-webhook-trigger/invoke?token=App
 
@@ -54,6 +55,9 @@ http://<EC2_IP>:8080/multibranch-webhook-trigger/invoke?token=App
     + Select Prometheus and enter URL to test it.
 * Dashboard
     + Import a dashboard using **12708** for **Nginx Exporter**
+* Alert Rule
+    + nginx_up{job="nginx"} for the query
+    + set threshold for alert condition
 
 **USERDATA**
 ----------
